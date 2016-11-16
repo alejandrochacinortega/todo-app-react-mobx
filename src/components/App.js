@@ -5,6 +5,8 @@ import {observer} from 'mobx-react';
 import Header from './Header';
 import AddTodo from './AddTodo';
 import TodoCard from './TodoCard';
+import CompletedTasks from './CompletedTasks';
+
 
 
 
@@ -16,6 +18,8 @@ class App extends React.Component {
         <Header title="Todo List"/>
         <AddTodo />
         <TodoCard />
+        <hr/>
+        <CompletedTasks />
       </div>
     )
   }

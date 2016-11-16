@@ -11,6 +11,19 @@ var TODOS = [
   },
   {
     'name'     : 'buy milk',
+    'isDone'   : false,
+    'isVisible': true
+  }
+];
+
+var TASKCOMPLETED = [
+  {
+    'name'     : 'omar',
+    'isDone'   : true,
+    'isVisible': true
+  },
+  {
+    'name'     : 'sigma',
     'isDone'   : true,
     'isVisible': true
   }
@@ -18,19 +31,12 @@ var TODOS = [
 
 class TodoStore {
 
-  @observable todos = [];
+  @observable todos          = [];
+  @observable tasksCompleted = [];
 
   constructor() {
-    TODOS.map((todo => this.todos.push(new TodoModel(todo))))
-  }
-
-  @action
-  toggleTask(task) {
-    _.find(this.todos, function (todo) {
-      if (todo.name == task.name) {
-        todo.isDone = !todo.isDone
-      }
-    })
+    TODOS.map((todo => this.todos.push(new TodoModel(todo))));
+    TASKCOMPLETED.map((todo => this.tasksCompleted.push(new TodoModel(todo))))
   }
 
   @action
@@ -51,6 +57,18 @@ class TodoStore {
     }))
   }
 
+  @action
+  toggleTask(task) {
+    task.isDone = !task.isDone;
+    if (task.isDone) {
+      _.remove(this.todos, t => t.name == task.name);
+      this.tasksCompleted.push(task);
+    }
+    else {
+      _.remove(this.tasksCompleted, t => t.name == task.name)
+      this.todos.push(task);
+    }
+  }
 }
 
 const todosStore = new TodoStore();

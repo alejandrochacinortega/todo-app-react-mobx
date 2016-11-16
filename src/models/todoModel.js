@@ -7,8 +7,8 @@ class TodoModel {
 
   constructor (todo) {
     this.name = todo.name;
-    this.isDone = false;
-    this.isVisible = true
+    this.isDone = todo.isDone;
+    this.isVisible = todo.isVisible
   }
 }
 

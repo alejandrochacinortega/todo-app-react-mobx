@@ -45,7 +45,7 @@ class AddTodo extends React.Component {
         <form onSubmit={this.addTask.bind(this)}>
           <input
             type="text"
-            placeholder="Add a new task"
+            placeholder="List item"
             value={this.newTask}
             onChange={this.onChange.bind(this)}/>
           <button onClick={this.addTask.bind(this)}>Add new task</button>
