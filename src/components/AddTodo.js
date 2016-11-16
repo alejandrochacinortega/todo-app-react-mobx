@@ -6,11 +6,10 @@ import TodoStore from '../stores/TodoStore';
 import ErrorTaskExists from './ErrorTaskExists';
 
 
-
 @observer
 class AddTodo extends React.Component {
 
-  @observable newTask;
+  @observable newTask = "";
   @observable taskAlreadyExist;
 
   onChange(event) {
@@ -18,36 +17,40 @@ class AddTodo extends React.Component {
 
   }
 
-  async addTask() {
+  async addTask(event) {
+    event.preventDefault();
     try {
       await TodoStore.addTask(this.newTask);
       this.newTask = "";
       this.taskAlreadyExist = "";
     }
     catch (error) {
-      switch(error.message) {
+      console.log('error ', error);
+      switch (error.message) {
         case "task is empty":
           this.taskAlreadyExist = error.message;
           break;
         case "task already exist":
-          this.taskAlreadyExist = error.message - "Please add a new task";
+          this.taskAlreadyExist = error.message;
           break;
         default:
-        this.taskAlreadyExist = error.message;
+          this.taskAlreadyExist = error.message;
       }
-      this.newTask = undefined;
+      this.newTask = "";
     }
   }
 
   render() {
     return (
       <div>
-        <input
-          type="text"
-          placeholder="Add a new task"
-          value={this.newTask}
-          onChange={this.onChange.bind(this)}/>
-        <button onClick={this.addTask.bind(this)}>Add new task</button>
+        <form onSubmit={this.addTask.bind(this)}>
+          <input
+            type="text"
+            placeholder="Add a new task"
+            value={this.newTask}
+            onChange={this.onChange.bind(this)}/>
+          <button onClick={this.addTask.bind(this)}>Add new task</button>
+        </form>
         <ErrorTaskExists taskAlreadyExist={this.taskAlreadyExist}></ErrorTaskExists>
       </div>
     )
