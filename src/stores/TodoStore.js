@@ -11,7 +11,7 @@ var TODOS = [
   },
   {
     'name'     : 'buy milk',
-    'isDone'   : false,
+    'isDone'   : true,
     'isVisible': true
   }
 ];

@@ -13,15 +13,16 @@ class TodoCardItem extends React.Component {
 }
 
 render() {
-
   var taskStyle = {
     'color': this.props.todo.isDone ? 'green' : 'red'
   };
 
   return (
     <tr>
-      <td style={taskStyle} onClick={this.toggleTask.bind(this)}>{this.props.todo.name}</td>
-      <td>{this.props.todo.isDone}</td>
+        <td style={taskStyle} onClick={this.toggleTask.bind(this)}>{this.props.todo.name}</td>
+        <td>
+          <input type="checkbox"  checked={this.props.todo.isDone} onChange={this.toggleTask.bind(this)}/>
+        </td>
     </tr>
   )
 }
