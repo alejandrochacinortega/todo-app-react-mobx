@@ -26,18 +26,27 @@ class TodoStore {
 
   @action
   toggleTask(task) {
-    _.find(this.todos, function(t) {
-      if (t.name == task.name) {
-        t.isDone = !t.isDone
+    _.find(this.todos, function (todo) {
+      if (todo.name == task.name) {
+        todo.isDone = !todo.isDone
       }
     })
   }
 
   @action
   addTask(task) {
+    if (task == null) {
+      throw new Error("task is empty")
+    }
+    _.find(this.todos, function (todo) {
+      if (todo.name == task) {
+        throw new Error("task already exist")
+      }
+    });
+
     this.todos.push(new TodoModel({
-      name: task,
-      isDone: false,
+      name     : task,
+      isDone   : false,
       isVisible: true
     }))
   }

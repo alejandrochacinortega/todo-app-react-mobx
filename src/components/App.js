@@ -15,7 +15,6 @@ class App extends React.Component {
       <div>
         <Header title="Todo List"/>
         <AddTodo />
-        <p>Error</p>
         <TodoCard />
       </div>
     )
