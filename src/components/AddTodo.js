@@ -25,7 +25,6 @@ class AddTodo extends React.Component {
       this.taskAlreadyExist = "";
     }
     catch (error) {
-      console.log('error ', error);
       switch (error.message) {
         case "task is empty":
           this.taskAlreadyExist = error.message;

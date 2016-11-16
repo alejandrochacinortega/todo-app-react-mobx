@@ -35,7 +35,6 @@ class TodoStore {
 
   @action
   addTask(task) {
-    console.log('task ', task);
     if (task.length < 1) {
       throw new Error("task is empty")
     }
